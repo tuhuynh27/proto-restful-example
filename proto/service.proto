@@ -1,0 +1,23 @@
+syntax = "proto3";
+package pb;
+
+import "google/api/annotations.proto";
+import "protoc-gen-swagger/options/annotations.proto";
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "github.com/mwitkow/go-proto-validators/validator.proto";
+import "message.proto";
+
+option (gogoproto.unmarshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.marshaler_all) = true;
+
+service Auth {
+    rpc Login(UserRequest) returns (UserResponse) {
+        option (google.api.http) = { post: "/login", body: "*" };
+    }
+
+    rpc GetUser(GetUserRequest) returns (GetUserResponse) {
+        option (google.api.http) = { get: "/users" };
+    }
+}
